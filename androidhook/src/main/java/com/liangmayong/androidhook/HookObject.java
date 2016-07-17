@@ -118,7 +118,13 @@ public class HookObject<T> {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Hook hook = getHook(method.getName());
             if (hook != null && hook.isEnable()) {
-                return hook.onHook(mBaseObject, method, args);
+                //befor
+                hook.beforeMethod(mBaseObject, method, args);
+                //hook
+                Object result = hook.onHook(mBaseObject, method, args);
+                //after
+                hook.afterMethod(mBaseObject, method, args);
+                return result;
             }
             Object result = method.invoke(mBaseObject, args);
             return result;
