@@ -17,8 +17,10 @@ import java.lang.reflect.Constructor;
  */
 public abstract class PatchObject<T> {
 
+    //hookObject
     protected HookObject<T> hookObject;
 
+    //baseObject
     protected T baseObject;
 
     /**
@@ -33,16 +35,29 @@ public abstract class PatchObject<T> {
         afterHookApply(hookObject);
     }
 
+    /**
+     * getBaseObject
+     *
+     * @return t
+     */
     public T getBaseObject() {
         return baseObject;
     }
 
+    /**
+     * getProxyObject
+     *
+     * @return t
+     */
     public T getProxyObject() {
         return hookObject.getProxyObject();
     }
 
     /**
      * initHookObject
+     *
+     * @param baseObject baseObject
+     * @return hook object
      */
     protected HookObject<T> initHookObject(T baseObject) {
         return new HookObject<T>(baseObject);
@@ -80,6 +95,11 @@ public abstract class PatchObject<T> {
         }
     }
 
+    /**
+     * addHook
+     *
+     * @param hookType hookType
+     */
     protected void addHook(Class<? extends Hook> hookType) {
         try {
             Constructor<?> constructor = hookType.getDeclaredConstructors()[0];
@@ -96,11 +116,16 @@ public abstract class PatchObject<T> {
     /**
      * afterHookApply
      *
-     * @param hookObject HookObject
+     * @param hookObject hookObject
      */
     protected void afterHookApply(HookObject<T> hookObject) {
     }
 
+    /**
+     * getHookObject
+     *
+     * @return hookObject
+     */
     public HookObject<T> getHookObject() {
         return hookObject;
     }
