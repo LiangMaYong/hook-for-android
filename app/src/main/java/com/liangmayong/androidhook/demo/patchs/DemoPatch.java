@@ -3,6 +3,7 @@ package com.liangmayong.androidhook.demo.patchs;
 import com.liangmayong.androidhook.PatchObject;
 import com.liangmayong.androidhook.annotation.Patch;
 import com.liangmayong.androidhook.demo.Demo;
+import com.liangmayong.androidhook.demo.DemoImpl;
 
 /**
  * Created by 007 on 2016/7/17.
@@ -16,5 +17,9 @@ public class DemoPatch extends PatchObject<Demo> {
      */
     public DemoPatch(Demo baseObject) {
         super(baseObject);
+    }
+
+    public DemoPatch(Demo baseObject, Class<?>... proxyInterfaces) {
+        super(baseObject, proxyInterfaces);
     }
 }

@@ -30,7 +30,19 @@ public abstract class PatchObject<T> {
      */
     public PatchObject(T baseObject) {
         this.baseObject = baseObject;
-        this.hookObject = initHookObject(baseObject);
+        this.hookObject = initHookObject(baseObject, (Class<?>[]) null);
+        applyHooks();
+        afterHookApply(hookObject);
+    }
+
+    /**
+     * PatchObject
+     *
+     * @param baseObject baseObject
+     */
+    public PatchObject(T baseObject, Class<?>... proxyInterfaces) {
+        this.baseObject = baseObject;
+        this.hookObject = initHookObject(baseObject, proxyInterfaces);
         applyHooks();
         afterHookApply(hookObject);
     }
@@ -47,10 +59,19 @@ public abstract class PatchObject<T> {
     /**
      * getProxyObject
      *
+     * @return obj
+     */
+    public Object getProxyObject() {
+        return hookObject.getProxyInterface();
+    }
+
+    /**
+     * getProxy
+     *
      * @return t
      */
-    public T getProxyObject() {
-        return hookObject.getProxyObject();
+    public T getProxy() {
+        return hookObject.getProxy();
     }
 
     /**
@@ -59,8 +80,8 @@ public abstract class PatchObject<T> {
      * @param baseObject baseObject
      * @return hook object
      */
-    protected HookObject<T> initHookObject(T baseObject) {
-        return new HookObject<T>(baseObject);
+    protected HookObject<T> initHookObject(T baseObject, Class<?>... proxyInterfaces) {
+        return new HookObject<T>(baseObject, proxyInterfaces);
     }
 
     /**

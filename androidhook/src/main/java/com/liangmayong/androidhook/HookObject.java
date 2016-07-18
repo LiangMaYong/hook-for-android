@@ -16,28 +16,52 @@ import java.util.Map;
 public class HookObject<T> {
 
     protected T mBaseObject;
-    protected T mProxyObject;
+    protected Object mProxyObject;
 
+    // hook mapping
     private Map<String, Hook> internalHookMapping = new HashMap<String, Hook>();
 
+    /**
+     * HookObject
+     *
+     * @param baseObject      baseObject
+     * @param proxyInterfaces proxyInterfaces
+     */
     public HookObject(T baseObject, Class<?>... proxyInterfaces) {
         this(baseObject == null ? null : baseObject.getClass().getClassLoader(), baseObject, proxyInterfaces);
     }
 
+    /**
+     * HookObject
+     *
+     * @param cl              cl
+     * @param baseObject      baseObject
+     * @param proxyInterfaces proxyInterfaces
+     */
     public HookObject(ClassLoader cl, T baseObject, Class<?>... proxyInterfaces) {
         this.mBaseObject = baseObject;
         if (mBaseObject != null) {
             if (proxyInterfaces == null) {
                 proxyInterfaces = baseObject.getClass().getInterfaces();
             }
-            mProxyObject = (T) Proxy.newProxyInstance(cl, proxyInterfaces, new HookHandler());
+            mProxyObject = Proxy.newProxyInstance(cl, proxyInterfaces, new HookHandler());
         }
     }
 
+    /**
+     * HookObject
+     *
+     * @param baseObject baseObject
+     */
     public HookObject(T baseObject) {
         this(baseObject, (Class<?>[]) null);
     }
 
+    /**
+     * addHook
+     *
+     * @param hook hook
+     */
     public void addHook(Hook hook) {
         if (hook != null && hook.getMethodName() != null && !"".equals(hook.getMethodName())) {
             internalHookMapping.put(hook.getMethodName(), hook);
@@ -88,8 +112,17 @@ public class HookObject<T> {
      *
      * @return HookProxy
      */
-    public T getProxyObject() {
+    public Object getProxyInterface() {
         return mProxyObject;
+    }
+
+    /**
+     * getProxy
+     *
+     * @return HookProxy
+     */
+    public T getProxy() {
+        return (T) mProxyObject;
     }
 
     /**
