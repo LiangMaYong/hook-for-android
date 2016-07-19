@@ -7,4 +7,6 @@ import java.lang.reflect.Method;
  * Created by LiangMaYong on 2016/7/18. Version 1.0
  */
 public interface ProxyInvocationHandler extends InvocationHandler {
+    @Override
+    Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
 }
