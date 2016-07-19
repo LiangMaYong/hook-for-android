@@ -4,9 +4,16 @@ this is android aop framework
 Welcome Star and [Issues](https://github.com/LiangMaYong/hook-for-android/issues)
 
 ## gradle
+aop
 ```
 dependencies {
     compile 'com.liangmayong:androidhook:1.0.0'
+}
+```
+javassist
+```
+dependencies {
+    compile 'com.liangmayong:androidhook-javassist:1.0.0'
 }
 ```
 ##Technical exchange
