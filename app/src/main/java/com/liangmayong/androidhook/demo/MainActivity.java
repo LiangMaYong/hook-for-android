@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void demo() {
         DemoPatch patch = new DemoPatch(new DemoImpl());
-
-        Log.d("TAG", ((Demo) patch.getProxyObject()).getCount() + "");
+        DemoImpl demo = (DemoImpl) patch.getProxyObject();
+        Log.d("TAG", demo.getCount() + "");
     }
 }

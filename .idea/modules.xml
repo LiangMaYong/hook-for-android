@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/androidhook/androidhook.iml" filepath="$PROJECT_DIR$/androidhook/androidhook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidhook-javassist/androidhook-javassist.iml" filepath="$PROJECT_DIR$/androidhook-javassist/androidhook-javassist.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hook-for-android.iml" filepath="$PROJECT_DIR$/hook-for-android.iml" />
     </modules>
